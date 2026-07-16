@@ -7,6 +7,7 @@ import {
 import heroCar from "@/assets/hero-car.jpg";
 import carteGrise from "@/assets/carte-grise.jpg";
 import laptopAnts from "@/assets/laptop-ants.jpg";
+import logoAsset from "@/assets/certif-auto-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,16 +23,13 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-function Logo() {
+function Logo({ className = "h-9" }: { className?: string }) {
   return (
-    <div className="flex items-center gap-2">
-      <div className="relative">
-        <Car className="h-7 w-7 text-[color:var(--brand)]" strokeWidth={2.2} />
-      </div>
-      <span className="text-xl font-semibold tracking-tight">
-        Certif<span className="text-[color:var(--brand)]">-Auto</span>
-      </span>
-    </div>
+    <img
+      src={logoAsset.url}
+      alt="Certif-Auto"
+      className={`${className} w-auto object-contain`}
+    />
   );
 }
 
