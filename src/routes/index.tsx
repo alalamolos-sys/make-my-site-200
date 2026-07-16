@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-function Logo({ className = "h-12" }: { className?: string }) {
+function Logo({ className = "h-14" }: { className?: string }) {
   return (
     <img
       src={logoAsset.url}
