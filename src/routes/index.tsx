@@ -103,9 +103,10 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-2 lg:items-center">
         <div>
-          <div className="mb-6 inline-flex items-center rounded-2xl border border-border/60 bg-surface/60 px-5 py-3 backdrop-blur-sm">
-            <Logo className="h-28 w-auto" />
+          <div className="mb-8">
+            <Logo size="lg" tagline />
           </div>
+
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
             La carte grise.
             <br />
