@@ -7,7 +7,7 @@ import {
 import heroCar from "@/assets/hero-car.jpg";
 import carteGrise from "@/assets/carte-grise.jpg";
 import laptopAnts from "@/assets/laptop-ants.jpg";
-import logoAsset from "@/assets/certif-auto-logo.png.asset.json";
+import logoIcon from "@/assets/certif-auto-icon.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,15 +23,42 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-function Logo({ className = "h-14" }: { className?: string }) {
+function Logo({
+  size = "md",
+  tagline = false,
+}: {
+  size?: "sm" | "md" | "lg";
+  tagline?: boolean;
+}) {
+  const s = {
+    sm: { icon: "h-8", text: "text-xl", gap: "gap-2" },
+    md: { icon: "h-11", text: "text-3xl", gap: "gap-3" },
+    lg: { icon: "h-16 sm:h-20", text: "text-4xl sm:text-5xl", gap: "gap-4" },
+  }[size];
+
   return (
-    <img
-      src={logoAsset.url}
-      alt="Certif-Auto"
-      className={`${className} w-auto object-contain`}
-    />
+    <div className="inline-flex flex-col">
+      <div className={`inline-flex items-center ${s.gap}`}>
+        <img
+          src={logoIcon}
+          alt="Certif-Auto"
+          width={992}
+          height={672}
+          className={`${s.icon} w-auto object-contain`}
+        />
+        <span className={`${s.text} font-bold leading-none tracking-tight`}>
+          Certif<span className="text-gradient-brand">-Auto</span>
+        </span>
+      </div>
+      {tagline && (
+        <span className="mt-2 text-xs text-muted-foreground sm:text-sm">
+          IA &amp; OCR pour cartes grises • Remplissage automatique sur Chrome
+        </span>
+      )}
+    </div>
   );
 }
+
 
 function Nav() {
   const links = [
@@ -45,7 +72,7 @@ function Nav() {
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-        <Logo className="h-20 w-auto" />
+        <Logo size="md" />
         <nav className="hidden items-center gap-8 md:flex">
           {links.map(([label, href]) => (
             <a key={href} href={href} className="text-sm text-muted-foreground transition hover:text-foreground">
@@ -76,9 +103,10 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-2 lg:items-center">
         <div>
-          <div className="mb-6 inline-flex items-center rounded-2xl border border-border/60 bg-surface/60 px-5 py-3 backdrop-blur-sm">
-            <Logo className="h-28 w-auto" />
+          <div className="mb-8">
+            <Logo size="lg" tagline />
           </div>
+
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
             La carte grise.
             <br />
@@ -353,7 +381,7 @@ function Footer() {
   return (
     <footer className="border-t border-border/60 py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
-        <Logo className="h-16 w-auto" />
+        <Logo size="sm" />
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Certif-Auto. Tous droits réservés.</p>
         <div className="flex gap-6 text-xs text-muted-foreground">
           <a href="#" className="hover:text-foreground">Mentions légales</a>
