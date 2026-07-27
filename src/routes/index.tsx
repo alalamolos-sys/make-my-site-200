@@ -381,7 +381,7 @@ function Footer() {
   return (
     <footer className="border-t border-border/60 py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
-        <Logo className="h-16 w-auto" />
+        <Logo size="sm" />
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Certif-Auto. Tous droits réservés.</p>
         <div className="flex gap-6 text-xs text-muted-foreground">
           <a href="#" className="hover:text-foreground">Mentions légales</a>
