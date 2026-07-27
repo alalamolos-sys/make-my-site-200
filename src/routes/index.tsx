@@ -1,410 +1,202 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  ScanLine, Lock, ShieldCheck, Brain, Chrome, PlayCircle, Check,
-  Car, UserRoundCog, Shuffle, FileText, Plus, Shield, Globe, EyeOff,
-  Zap, CheckCircle2, ArrowRight,
+  ArrowRight, BadgeCheck, BrainCircuit, Car, Check, CheckCircle2, Chrome,
+  Clock3, FileCheck2, FileText, Gauge, LockKeyhole, Menu, Play, ScanLine,
+  ShieldCheck, Sparkles, Upload, Workflow, Zap,
 } from "lucide-react";
-import heroCar from "@/assets/hero-car.jpg";
 import carteGrise from "@/assets/carte-grise.jpg";
-import laptopAnts from "@/assets/laptop-ants.jpg";
 import logoIcon from "@/assets/certif-auto-icon.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Certif-Auto — La carte grise remplie en 1 clic" },
-      { name: "description", content: "Certif-Auto lit vos cartes grises grâce à l'IA et remplit automatiquement tous vos formulaires sur ANTS, VIS et tous les sites d'immatriculation." },
-      { property: "og:title", content: "Certif-Auto — La carte grise remplie en 1 clic" },
-      { property: "og:description", content: "L'extension qui lit vos cartes grises et remplit automatiquement les formulaires ANTS, VIS et plus." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "description", content: "L'IA qui lit vos cartes grises et complète automatiquement vos formulaires ANTS, VIS et logiciels métiers." },
     ],
   }),
   component: Landing,
 });
 
-function Logo({
-  size = "md",
-  tagline = false,
-}: {
-  size?: "sm" | "md" | "lg";
-  tagline?: boolean;
-}) {
-  const s = {
-    sm: { icon: "h-8", text: "text-xl", gap: "gap-2" },
-    md: { icon: "h-11", text: "text-3xl", gap: "gap-3" },
-    lg: { icon: "h-16 sm:h-20", text: "text-4xl sm:text-5xl", gap: "gap-4" },
-  }[size];
+const nav = [
+  ["Produit", "#produit"], ["Fonctionnement", "#fonctionnement"], ["Démarches", "#demarches"],
+  ["Sécurité", "#securite"], ["Tarifs", "#tarifs"],
+];
 
+function Brand({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="inline-flex flex-col">
-      <div className={`inline-flex items-center ${s.gap}`}>
-        <img
-          src={logoIcon}
-          alt="Certif-Auto"
-          width={992}
-          height={672}
-          className={`${s.icon} w-auto object-contain`}
-        />
-        <span className={`${s.text} font-bold leading-none tracking-tight`}>
-          Certif<span className="text-gradient-brand">-Auto</span>
-        </span>
-      </div>
-      {tagline && (
-        <span className="mt-2 text-xs text-muted-foreground sm:text-sm">
-          IA &amp; OCR pour cartes grises • Remplissage automatique sur Chrome
-        </span>
-      )}
-    </div>
+    <a href="#" className="brand" aria-label="Certif-Auto — accueil">
+      <span className="brand-mark"><img src={logoIcon} alt="" /></span>
+      <span className={compact ? "brand-name brand-name-sm" : "brand-name"}>Certif<span>-Auto</span></span>
+    </a>
   );
 }
 
-
-function Nav() {
-  const links = [
-    ["Fonctionnalités", "#features"],
-    ["Comment ça marche", "#how"],
-    ["Démarches", "#demarches"],
-    ["Sécurité", "#security"],
-    ["Tarifs", "#pricing"],
-    ["FAQ", "#faq"],
-  ];
+function Header() {
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-        <Logo size="md" />
-        <nav className="hidden items-center gap-8 md:flex">
-          {links.map(([label, href]) => (
-            <a key={href} href={href} className="text-sm text-muted-foreground transition hover:text-foreground">
-              {label}
-            </a>
-          ))}
+    <header className="site-header">
+      <div className="shell header-inner">
+        <Brand compact />
+        <nav className="desktop-nav">
+          {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
         </nav>
-        <a href="#cta" className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium hover:bg-surface-2">
-          Installer l'extension <Chrome className="h-4 w-4 text-[color:var(--brand)]" />
-        </a>
+        <a className="header-cta" href="#demo"><Chrome size={17} /> Installer l'extension</a>
+        <button className="mobile-menu" aria-label="Ouvrir le menu"><Menu /></button>
       </div>
     </header>
   );
 }
 
-function Hero() {
+function ScannerDemo() {
+  const fields = [
+    ["Immatriculation", "AB-123-CD"], ["Marque", "VOLKSWAGEN"],
+    ["Modèle", "GOLF VIII"], ["VIN", "WVWZZZCDZPW123456"],
+  ];
   return (
-    <section className="relative overflow-hidden pt-32 pb-24">
-      <img
-        src={heroCar}
-        alt=""
-        width={1600}
-        height={1200}
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
-      />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
-      <div className="pointer-events-none absolute -left-40 top-40 h-96 w-96 rounded-full bg-[color:var(--brand-2)]/20 blur-3xl" />
-
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-2 lg:items-center">
-        <div>
-          <div className="mb-8">
-            <Logo size="lg" tagline />
-          </div>
-
-          <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-            La carte grise.
-            <br />
-            <span className="text-gradient-brand">Remplie en 1 clic.</span>
-          </h1>
-          <p className="mt-6 max-w-lg text-lg text-muted-foreground">
-            Certif-Auto lit vos cartes grises grâce à l'IA et remplit automatiquement tous vos formulaires sur ANTS, VIS et tous les autres sites.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a href="#cta" className="btn-brand hover:btn-brand-hover">
-              <Chrome className="h-5 w-5" /> Ajouter à Chrome
-            </a>
-            <a href="#how" className="inline-flex items-center gap-2 text-sm font-medium text-foreground/90 hover:text-foreground">
-              <PlayCircle className="h-6 w-6" /> Voir la démo
-            </a>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {[
-              { icon: ScanLine, title: "OCR intelligent", sub: "Haute précision" },
-              { icon: Lock, title: "100% sécurisé", sub: "Données protégées" },
-              { icon: ShieldCheck, title: "Compatible avec", sub: "toutes les démarches" },
-            ].map(({ icon: Icon, title, sub }) => (
-              <div key={title} className="flex items-start gap-3">
-                <div className="rounded-lg border border-border bg-surface p-2">
-                  <Icon className="h-5 w-5 text-[color:var(--brand)]" />
-                </div>
-                <div>
-                  <div className="text-sm font-medium">{title}</div>
-                  <div className="text-xs text-muted-foreground">{sub}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="scanner-wrap" id="demo">
+      <div className="scanner-glow" />
+      <div className="app-window">
+        <div className="window-bar">
+          <div className="window-dots"><i /><i /><i /></div>
+          <div className="window-url"><LockKeyhole size={12} /> ants.gouv.fr</div>
+          <div className="window-status"><span /> Extension active</div>
         </div>
-
-        {/* Right visual */}
-        <div className="relative mx-auto w-full max-w-xl">
-          <div className="relative">
-            <img
-              src={carteGrise}
-              alt="Carte grise"
-              width={800}
-              height={1000}
-              className="mx-auto w-64 rotate-[-3deg] rounded-lg shadow-2xl ring-1 ring-white/10"
-            />
-            {/* Extracted fields card */}
-            <div className="absolute -right-2 top-6 w-72 space-y-2 rounded-2xl border border-border bg-surface/90 p-3 backdrop-blur glow-ring md:-right-8">
-              {[
-                ["Immatriculation", "AB-123-CD"],
-                ["Marque", "VOLKSWAGEN"],
-                ["Modèle", "308"],
-                ["VIN", "WVWZZZ3CZHE123456"],
-              ].map(([label, value]) => (
-                <div key={label} className="flex items-center justify-between rounded-lg border border-border bg-surface-2 px-3 py-2">
-                  <div>
-                    <div className="text-[10px] uppercase tracking-wide text-muted-foreground">{label}</div>
-                    <div className="text-sm font-semibold">{value}</div>
-                  </div>
-                  <CheckCircle2 className="h-5 w-5 text-[color:var(--brand)]" />
+        <div className="app-content">
+          <div className="document-side">
+            <div className="eyebrow"><Upload size={13} /> DOCUMENT IMPORTÉ</div>
+            <div className="document-card">
+              <img src={carteGrise} alt="Aperçu d'une carte grise" />
+              <div className="scan-line" />
+              <div className="scan-corner tl" /><div className="scan-corner tr" />
+              <div className="scan-corner bl" /><div className="scan-corner br" />
+            </div>
+            <div className="analysis-pill"><Sparkles size={15} /> Analyse terminée en 1,8 s</div>
+          </div>
+          <div className="fields-side">
+            <div className="fields-heading">
+              <div><span>Certif-Auto</span><strong>18 champs détectés</strong></div>
+              <BadgeCheck size={24} />
+            </div>
+            <div className="field-list">
+              {fields.map(([label, value], index) => (
+                <div className="field" key={label} style={{ animationDelay: `${index * 120}ms` }}>
+                  <div><span>{label}</span><strong>{value}</strong></div><CheckCircle2 size={18} />
                 </div>
               ))}
-              <div className="mt-2 flex items-center justify-between gap-2 rounded-lg border border-[color:var(--brand)]/30 bg-[color:var(--brand)]/5 px-3 py-2 text-xs">
-                <span>Remplissage automatique sur tous les formulaires</span>
-                <Zap className="h-4 w-4 text-[color:var(--brand)]" />
-              </div>
             </div>
+            <button className="fill-button"><Zap size={17} /> Remplir le formulaire ANTS</button>
+            <p className="privacy-note"><ShieldCheck size={14} /> Données chiffrées et supprimées après traitement</p>
           </div>
+        </div>
+      </div>
+      <div className="floating-card fc-one"><Gauge size={17} /><span><strong>99,2 %</strong> de précision</span></div>
+      <div className="floating-card fc-two"><Clock3 size={17} /><span><strong>4 min</strong> gagnées / dossier</span></div>
+    </div>
+  );
+}
+
+function Hero() {
+  return (
+    <main className="hero">
+      <div className="hero-grid" />
+      <div className="orb orb-one" /><div className="orb orb-two" />
+      <div className="shell hero-layout">
+        <div className="hero-copy">
+          <div className="announcement"><span>Nouveau</span> L'IA pensée pour l'immatriculation <ArrowRight size={14} /></div>
+          <h1>La carte grise.<br /><em>Remplie en 1 clic.</em></h1>
+          <p className="hero-text">Certif-Auto lit automatiquement une carte grise, extrait les informations utiles et complète vos démarches ANTS, VIS ou tout autre formulaire métier.</p>
+          <div className="hero-actions">
+            <a className="primary-button" href="#contact"><Chrome size={20} /> Ajouter à Chrome <ArrowRight size={17} /></a>
+            <a className="secondary-button" href="#fonctionnement"><span className="play-icon"><Play size={14} fill="currentColor" /></span> Voir la démo</a>
+          </div>
+          <div className="proof-row">
+            <span><Check size={15} /> Installation en 2 minutes</span>
+            <span><Check size={15} /> Sans engagement</span>
+            <span><Check size={15} /> Conforme RGPD</span>
+          </div>
+        </div>
+        <ScannerDemo />
+      </div>
+      <div className="shell logo-strip">
+        <p>Compatible avec vos outils du quotidien</p>
+        <div><span>ANTS</span><span>VIS</span><span>CRM</span><span>ERP</span><span>API</span></div>
+      </div>
+    </main>
+  );
+}
+
+const benefits = [
+  { icon: ScanLine, title: "OCR automobile", text: "Une lecture précise des cartes grises françaises, même photographiées depuis un smartphone." },
+  { icon: BrainCircuit, title: "Extraction intelligente", text: "L'IA comprend la structure du document, vérifie les champs et détecte les incohérences." },
+  { icon: Chrome, title: "Autofill universel", text: "Remplissez ANTS, VIS, votre CRM, votre ERP ou vos formulaires internes sans ressaisie." },
+];
+
+function Product() {
+  return (
+    <section className="section" id="produit">
+      <div className="shell">
+        <div className="section-heading centered"><span className="kicker">UNE SEULE EXTENSION</span><h2>De la carte grise au formulaire,<br />sans copier-coller.</h2><p>Certif-Auto transforme une tâche répétitive en un workflow instantané, fiable et traçable.</p></div>
+        <div className="benefit-grid">
+          {benefits.map(({ icon: Icon, title, text }, index) => (
+            <article className="benefit-card" key={title}>
+              <div className="benefit-number">0{index + 1}</div><div className="icon-box"><Icon /></div>
+              <h3>{title}</h3><p>{text}</p><a href="#contact">Découvrir <ArrowRight size={15} /></a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function TrustBar() {
-  const items = [
-    { icon: Shuffle, label: "Professionnels de l'automobile" },
-    { icon: Car, label: "Concessionnaires" },
-    { icon: UserRoundCog, label: "Mandataires" },
-    { icon: Shield, label: "Assureurs" },
-    { icon: FileText, label: "Administrations" },
-  ];
-  return (
-    <section className="border-y border-border/50 bg-background/60">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-6 py-6">
-        <span className="text-sm text-muted-foreground">Ils nous font confiance</span>
-        {items.map(({ icon: Icon, label }) => (
-          <div key={label} className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Icon className="h-4 w-4" /> {label}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function HowItWorks() {
+function WorkflowSection() {
   const steps = [
-    { icon: ScanLine, title: "1. Scannez", text: "Importez simplement une photo ou un scan de votre carte grise." },
-    { icon: Brain, title: "2. Extraction IA", text: "Notre IA OCR lit et extrait toutes les informations en quelques secondes." },
-    { icon: Chrome, title: "3. Remplissage auto", text: "L'extension remplit automatiquement tous les champs sur ANTS, VIS et n'importe quel formulaire." },
+    [Upload, "Importez", "Ajoutez une photo, un scan ou déposez directement le document dans l'extension."],
+    [ScanLine, "Certif-Auto lit", "L'OCR et l'IA extraient puis structurent chaque donnée utile du véhicule."],
+    [Workflow, "Choisissez la démarche", "ANTS, VIS, CRM ou formulaire métier : la page cible est automatiquement reconnue."],
+    [Zap, "Tout est rempli", "Les champs sont complétés en quelques secondes, prêts à être vérifiés et validés."],
   ];
   return (
-    <section id="how" className="bg-surface/40 py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-center text-3xl font-semibold md:text-4xl">Comment ça marche ?</h2>
-        <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3">
-          {steps.map((s, i) => (
-            <div key={s.title} className="relative flex flex-col items-center text-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-border bg-surface">
-                <s.icon className="h-7 w-7 text-[color:var(--brand)]" />
-              </div>
-              <h3 className="mt-6 font-semibold">{s.title}</h3>
-              <p className="mt-2 max-w-xs text-sm text-muted-foreground">{s.text}</p>
-              {i < steps.length - 1 && (
-                <div className="absolute top-8 left-[calc(50%+40px)] hidden h-px w-[calc(100%-80px)] border-t border-dashed border-border md:block" />
-              )}
-            </div>
-          ))}
+    <section className="section workflow-section" id="fonctionnement">
+      <div className="shell workflow-layout">
+        <div className="workflow-copy"><span className="kicker">COMMENT ÇA MARCHE</span><h2>Un geste simple.<br />Des heures économisées.</h2><p>Conçu pour les équipes qui traitent des dossiers toute la journée. Aucun changement d'outil, aucune formation lourde.</p><div className="metric-row"><div><strong>4 min</strong><span>gagnées par dossier</span></div><div><strong>18+</strong><span>champs détectés</span></div><div><strong>99,2%</strong><span>de précision</span></div></div></div>
+        <div className="steps-panel">
+          {steps.map(([Icon, title, text], index) => {
+            const StepIcon = Icon as typeof Upload;
+            return <div className="step-row" key={String(title)}><div className="step-index">{index + 1}</div><div className="step-icon"><StepIcon /></div><div><h3>{String(title)}</h3><p>{String(text)}</p></div></div>;
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-function Demarches() {
-  const items = [
-    { icon: Car, title: "Nouveau véhicule (Carte grise)", text: "Immatriculez un véhicule neuf ou d'occasion en quelques clics." },
-    { icon: UserRoundCog, title: "Changement de titulaire", text: "Gagnez du temps lors d'une cession ou d'un changement de propriétaire." },
-    { icon: Shuffle, title: "Changement de nature", text: "Passer de VP à VU, service à caravane, collection, taxi, etc." },
-    { icon: FileText, title: "Duplicata", text: "Perte, vol ou détérioration : obtenez un duplicata sans ressaisir les données." },
-    { icon: Plus, title: "Et plus encore…", text: "Toutes les démarches ANTS et tous les formulaires en ligne." },
-  ];
+function UseCases() {
+  const cases = ["Nouveau véhicule", "Changement de titulaire", "Duplicata", "Import de véhicule", "Changement de caractéristiques", "Dossier professionnel"];
   return (
-    <section id="demarches" className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-semibold md:text-4xl">Compatible avec toutes vos démarches</h2>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-muted-foreground">
-          Certif-Auto fonctionne partout où vous devez renseigner les informations d'un véhicule.
-        </p>
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {items.map((it) => (
-            <div key={it.title} className="card-dark p-6 text-center transition hover:-translate-y-1 hover:border-[color:var(--brand)]/40">
-              <it.icon className="mx-auto h-9 w-9 text-[color:var(--brand)]" />
-              <h3 className="mt-4 text-sm font-semibold">{it.title}</h3>
-              <p className="mt-2 text-xs text-muted-foreground">{it.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Features() {
-  const list = [
-    ["OCR ultra-précis", "Lecture fiable même sur les documents complexes."],
-    ["Remplissage intelligent", "Détection automatique des champs à compléter."],
-    ["Compatible tous sites", "ANTS, VIS, professionnels, assureurs, loueurs, etc."],
-    ["Zéro saisie manuelle", "Fini les erreurs et les pertes de temps."],
-    ["Mises à jour régulières", "Toujours compatible avec les dernières interfaces."],
-  ];
-  return (
-    <section id="features" className="bg-surface/40 py-24">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2">
-        <div>
-          <h2 className="text-3xl font-semibold md:text-4xl">L'IA au service de votre efficacité</h2>
-          <ul className="mt-8 space-y-5">
-            {list.map(([t, s]) => (
-              <li key={t} className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[color:var(--brand)]/20">
-                  <Check className="h-3.5 w-3.5 text-[color:var(--brand)]" />
-                </span>
-                <div>
-                  <div className="font-medium">{t}</div>
-                  <div className="text-sm text-muted-foreground">{s}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="relative">
-          <img
-            src={laptopAnts}
-            alt="ANTS remplissage automatique"
-            width={1200}
-            height={900}
-            loading="lazy"
-            className="w-full rounded-2xl border border-border shadow-2xl"
-          />
-          <div className="absolute -bottom-6 -right-4 w-56 rounded-2xl border border-border bg-surface p-4 shadow-xl glow-ring">
-            <div className="flex items-center gap-2">
-              <Car className="h-5 w-5 text-[color:var(--brand)]" />
-              <span className="text-sm font-semibold">Certif-Auto</span>
-            </div>
-            <div className="mx-auto mt-3 flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--success)]/20">
-              <Check className="h-6 w-6 text-[color:var(--success)]" />
-            </div>
-            <p className="mt-2 text-center text-xs text-muted-foreground">
-              Remplissage automatique terminé avec succès !
-            </p>
-            <button className="mt-3 w-full rounded-md bg-[color:var(--brand-2)] px-3 py-1.5 text-xs font-medium text-white">
-              Voir les données extraites
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section className="section" id="demarches"><div className="shell"><div className="section-heading split"><div><span className="kicker">TOUTES VOS DÉMARCHES</span><h2>Une seule technologie,<br />des dizaines de cas d'usage.</h2></div><p>Certif-Auto s'adapte à votre façon de travailler et peut être déployé sur les formulaires que vos équipes utilisent déjà.</p></div><div className="cases-grid">{cases.map((name, index) => <article className="case-card" key={name}><div className="case-top"><span>0{index + 1}</span><Car /></div><h3>{name}</h3><p>Lecture, contrôle et remplissage automatique des informations du véhicule et du titulaire.</p><div className="case-link">Automatiser cette démarche <ArrowRight size={15} /></div></article>)}</div></div></section>
   );
 }
 
 function Security() {
-  const items = [
-    { icon: Shield, title: "Aucune donnée stockée", text: "Vos données ne sont ni stockées ni conservées." },
-    { icon: Lock, title: "Chiffrement de bout en bout", text: "Toutes les données sont traitées en toute sécurité." },
-    { icon: Globe, title: "Hébergé en Europe", text: "Conforme RGPD, serveurs sécurisés en Europe." },
-    { icon: EyeOff, title: "Confidentialité garantie", text: "Aucune revente, aucun partage, jamais." },
-  ];
   return (
-    <section id="security" className="py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-center text-3xl font-semibold md:text-4xl">Sécurité & confidentialité</h2>
-        <p className="mx-auto mt-3 max-w-xl text-center text-muted-foreground">
-          Vos données sont précieuses. Nous les protégeons comme il se doit.
-        </p>
-        <div className="mt-14 grid grid-cols-2 gap-10 md:grid-cols-4">
-          {items.map((it) => (
-            <div key={it.title} className="text-center">
-              <it.icon className="mx-auto h-10 w-10 text-[color:var(--brand)]" strokeWidth={1.5} />
-              <h3 className="mt-4 text-sm font-semibold">{it.title}</h3>
-              <p className="mt-2 text-xs text-muted-foreground">{it.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <section className="section security-section" id="securite"><div className="shell security-card"><div className="security-copy"><span className="kicker">SÉCURITÉ PAR CONCEPTION</span><h2>Vos documents restent vos documents.</h2><p>Certif-Auto applique les standards attendus par les professionnels de l'automobile : chiffrement, contrôle d'accès et suppression des données après traitement.</p><ul><li><ShieldCheck /> Hébergement européen</li><li><LockKeyhole /> Chiffrement en transit et au repos</li><li><FileCheck2 /> Conformité RGPD</li></ul></div><div className="security-visual"><div className="shield-orbit"><div className="orbit orbit-a" /><div className="orbit orbit-b" /><div className="shield-core"><ShieldCheck /></div><span className="orbit-dot dot-a" /><span className="orbit-dot dot-b" /><span className="orbit-dot dot-c" /></div><div className="security-status"><span /><div><strong>Système opérationnel</strong><small>Toutes les protections sont actives</small></div></div></div></div></section>
+  );
+}
+
+function Pricing() {
+  return (
+    <section className="section" id="tarifs"><div className="shell"><div className="section-heading centered"><span className="kicker">OFFRE DE LANCEMENT</span><h2>Commencez sans complexité.</h2><p>Un tarif lisible pour valider le gain de temps avec votre équipe.</p></div><div className="pricing-card"><div className="pricing-main"><span className="plan-badge">PRO</span><h3>Certif-Auto Pro</h3><p>Pour garages, mandataires et concessions.</p><div className="price"><strong>99 €</strong><span>/ mois<br />par établissement</span></div><a className="primary-button wide" href="#contact">Demander une démonstration <ArrowRight size={17} /></a></div><div className="pricing-features"><h4>Tout ce qu'il vous faut pour démarrer</h4>{["Extension Chrome", "OCR et extraction IA", "ANTS et VIS", "Historique des dossiers", "Support prioritaire", "Mises à jour incluses"].map(item => <div key={item}><CheckCircle2 /> {item}</div>)}</div></div></div></section>
   );
 }
 
 function CTA() {
-  return (
-    <section id="cta" className="relative overflow-hidden py-28">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-[color:var(--brand-2)]/10" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-[radial-gradient(ellipse_at_center,oklch(0.62_0.2_240_/_0.25),transparent_70%)]" />
-      <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-30" viewBox="0 0 1200 400" fill="none">
-        <path d="M0 200 Q 300 100 600 200 T 1200 200" stroke="oklch(0.72 0.19 220)" strokeWidth="1" />
-        <path d="M0 250 Q 300 150 600 250 T 1200 250" stroke="oklch(0.72 0.19 245)" strokeWidth="1" opacity=".6" />
-      </svg>
-      <div className="relative mx-auto max-w-3xl px-6 text-center">
-        <h2 className="text-3xl font-semibold md:text-4xl">
-          Gagnez un temps précieux.
-          <br />À chaque démarche.
-        </h2>
-        <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-          Rejoignez des milliers de professionnels qui utilisent déjà Certif-Auto au quotidien.
-        </p>
-        <div className="mt-8 flex flex-col items-center gap-3">
-          <a href="#" className="btn-brand hover:btn-brand-hover">
-            <Chrome className="h-5 w-5" /> Ajouter à Chrome — C'est gratuit
-          </a>
-          <p className="flex items-center gap-2 text-xs text-muted-foreground">
-            <CheckCircle2 className="h-4 w-4 text-[color:var(--brand)]" />
-            Installation en 10 secondes — Aucun abonnement requis
-          </p>
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="cta-section" id="contact"><div className="shell cta-card"><div><span className="kicker">PRÊT À GAGNER DU TEMPS ?</span><h2>Votre prochaine carte grise<br />peut être remplie en 1 clic.</h2><p>Réservez une démonstration de 20 minutes adaptée à vos démarches.</p></div><a className="cta-white" href="mailto:contact@certif-auto.fr">Demander une démo <ArrowRight /></a></div></section>;
 }
 
 function Footer() {
-  return (
-    <footer className="border-t border-border/60 py-10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
-        <Logo size="sm" />
-        <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Certif-Auto. Tous droits réservés.</p>
-        <div className="flex gap-6 text-xs text-muted-foreground">
-          <a href="#" className="hover:text-foreground">Mentions légales</a>
-          <a href="#" className="hover:text-foreground">Confidentialité</a>
-          <a href="#" className="hover:text-foreground inline-flex items-center gap-1">Contact <ArrowRight className="h-3 w-3" /></a>
-        </div>
-      </div>
-    </footer>
-  );
+  return <footer><div className="shell footer-inner"><Brand compact /><p>© 2026 Certif-Auto. Tous droits réservés.</p><div><a href="#">Confidentialité</a><a href="#">Mentions légales</a><a href="mailto:contact@certif-auto.fr">Contact</a></div></div></footer>;
 }
 
 function Landing() {
-  return (
-    <main className="min-h-screen">
-      <Nav />
-      <Hero />
-      <TrustBar />
-      <HowItWorks />
-      <Demarches />
-      <Features />
-      <Security />
-      <CTA />
-      <Footer />
-    </main>
-  );
+  return <div className="site"><Header /><Hero /><Product /><WorkflowSection /><UseCases /><Security /><Pricing /><CTA /><Footer /></div>;
 }
