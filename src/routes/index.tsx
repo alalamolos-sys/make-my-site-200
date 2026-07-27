@@ -7,7 +7,7 @@ import {
 import heroCar from "@/assets/hero-car.jpg";
 import carteGrise from "@/assets/carte-grise.jpg";
 import laptopAnts from "@/assets/laptop-ants.jpg";
-import logoAsset from "@/assets/certif-auto-logo.png.asset.json";
+import logoIcon from "@/assets/certif-auto-icon.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
