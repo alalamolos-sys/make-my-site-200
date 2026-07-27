@@ -72,7 +72,7 @@ function Nav() {
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-        <Logo className="h-20 w-auto" />
+        <Logo size="md" />
         <nav className="hidden items-center gap-8 md:flex">
           {links.map(([label, href]) => (
             <a key={href} href={href} className="text-sm text-muted-foreground transition hover:text-foreground">
