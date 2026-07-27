@@ -45,7 +45,7 @@ function Nav() {
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-        <Logo />
+        <Logo className="h-20 w-auto" />
         <nav className="hidden items-center gap-8 md:flex">
           {links.map(([label, href]) => (
             <a key={href} href={href} className="text-sm text-muted-foreground transition hover:text-foreground">
@@ -76,10 +76,8 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-2 lg:items-center">
         <div>
-          <div className="mb-6 inline-flex items-center gap-4 rounded-2xl border border-border/60 bg-surface/60 px-5 py-3 backdrop-blur-sm">
-            <Logo className="h-16 w-auto" />
-            <div className="h-10 w-px bg-border" />
-            <span className="text-lg font-semibold tracking-tight text-foreground">Certif-Auto</span>
+          <div className="mb-6 inline-flex items-center rounded-2xl border border-border/60 bg-surface/60 px-5 py-3 backdrop-blur-sm">
+            <Logo className="h-28 w-auto" />
           </div>
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
             La carte grise.
@@ -355,7 +353,7 @@ function Footer() {
   return (
     <footer className="border-t border-border/60 py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
-        <Logo />
+        <Logo className="h-16 w-auto" />
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Certif-Auto. Tous droits réservés.</p>
         <div className="flex gap-6 text-xs text-muted-foreground">
           <a href="#" className="hover:text-foreground">Mentions légales</a>
