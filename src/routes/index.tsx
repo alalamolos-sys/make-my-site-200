@@ -23,15 +23,42 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-function Logo({ className = "h-14" }: { className?: string }) {
+function Logo({
+  size = "md",
+  tagline = false,
+}: {
+  size?: "sm" | "md" | "lg";
+  tagline?: boolean;
+}) {
+  const s = {
+    sm: { icon: "h-8", text: "text-xl", gap: "gap-2" },
+    md: { icon: "h-11", text: "text-3xl", gap: "gap-3" },
+    lg: { icon: "h-16 sm:h-20", text: "text-4xl sm:text-5xl", gap: "gap-4" },
+  }[size];
+
   return (
-    <img
-      src={logoAsset.url}
-      alt="Certif-Auto"
-      className={`${className} w-auto object-contain`}
-    />
+    <div className="inline-flex flex-col">
+      <div className={`inline-flex items-center ${s.gap}`}>
+        <img
+          src={logoIcon}
+          alt="Certif-Auto"
+          width={992}
+          height={672}
+          className={`${s.icon} w-auto object-contain`}
+        />
+        <span className={`${s.text} font-bold leading-none tracking-tight`}>
+          Certif<span className="text-gradient-brand">-Auto</span>
+        </span>
+      </div>
+      {tagline && (
+        <span className="mt-2 text-xs text-muted-foreground sm:text-sm">
+          IA &amp; OCR pour cartes grises • Remplissage automatique sur Chrome
+        </span>
+      )}
+    </div>
   );
 }
+
 
 function Nav() {
   const links = [
