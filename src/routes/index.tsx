@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   ArrowRight, BadgeCheck, BrainCircuit, Car, Check, CheckCircle2, Chrome,
   Clock3, FileCheck2, FileText, Gauge, LockKeyhole, Menu, Play, ScanLine,
@@ -6,6 +7,7 @@ import {
 } from "lucide-react";
 import carteGrise from "@/assets/carte-grise.jpg";
 import logoIcon from "@/assets/certif-auto-icon.png";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
