@@ -24,6 +24,29 @@ const nav = [
   ["Sécurité", "#securite"], ["Tarifs", "#tarifs"],
 ];
 
+function useScrollReveal() {
+  useEffect(() => {
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    if (!("IntersectionObserver" in window)) {
+      nodes.forEach((n) => n.classList.add("is-in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+    nodes.forEach((n) => io.observe(n));
+    return () => io.disconnect();
+  }, []);
+}
+
 function Brand({ compact = false }: { compact?: boolean }) {
   return (
     <a href="#" className="brand" aria-label="Certif-Auto — accueil">
@@ -34,8 +57,15 @@ function Brand({ compact = false }: { compact?: boolean }) {
 }
 
 function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
-    <header className="site-header">
+    <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
       <div className="shell header-inner">
         <Brand compact />
         <nav className="desktop-nav">
@@ -47,6 +77,7 @@ function Header() {
     </header>
   );
 }
+
 
 function ScannerDemo() {
   const fields = [
