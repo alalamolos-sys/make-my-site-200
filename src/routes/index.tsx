@@ -59,25 +59,46 @@ function Brand({ compact = false }: { compact?: boolean }) {
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
   return (
-    <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
+    <header className={scrolled || open ? "site-header is-scrolled" : "site-header"}>
       <div className="shell header-inner">
         <Brand compact />
         <nav className="desktop-nav">
           {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
         </nav>
         <a className="header-cta" href="#demo"><Chrome size={17} /> Installer l'extension</a>
-        <button className="mobile-menu" aria-label="Ouvrir le menu"><Menu /></button>
+        <button
+          className="mobile-menu"
+          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X /> : <Menu />}
+        </button>
+      </div>
+      <div className={open ? "mobile-panel is-open" : "mobile-panel"}>
+        <div className="shell">
+          {nav.map(([label, href]) => (
+            <a key={href} href={href} onClick={() => setOpen(false)}>{label} <ArrowRight size={16} /></a>
+          ))}
+          <a className="header-cta" href="#demo" onClick={() => setOpen(false)}><Chrome size={17} /> Installer l'extension</a>
+        </div>
       </div>
     </header>
   );
 }
+
 
 
 function ScannerDemo() {
