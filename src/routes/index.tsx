@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import {
   ArrowRight, BadgeCheck, BrainCircuit, Car, Check, CheckCircle2, Chrome,
   Clock3, FileCheck2, FileText, Gauge, LockKeyhole, Menu, Play, ScanLine,
-  ShieldCheck, Sparkles, Upload, Workflow, Zap,
+  ShieldCheck, Sparkles, Upload, Workflow, X, Zap,
 } from "lucide-react";
 import carteGrise from "@/assets/carte-grise.jpg";
 import logoIcon from "@/assets/certif-auto-icon.png";
