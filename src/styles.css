@@ -383,3 +383,4 @@ section[id]{scroll-margin-top:96px}
   .scanner-wrap{max-width:100%;margin:6px 0 0}
   .fc-one,.fc-two{display:none}
 }
+@media(max-width:820px){.document-card{width:64%}.document-side{padding:16px 18px 20px}}
