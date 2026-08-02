@@ -46,10 +46,10 @@ const procedures = [
 ];
 
 const steps = [
-  { icon: Camera, title: "Prenez les pièces en photo", text: "Depuis Certif Auto sur votre téléphone, photographiez la carte grise et les documents du dossier." },
-  { icon: ScanLine, title: "L’IA extrait les données", text: "L’OCR reconnaît automatiquement les informations utiles et les organise champ par champ." },
-  { icon: BadgeCheck, title: "Vérifiez en quelques secondes", text: "Contrôlez les données détectées et corrigez-les uniquement si nécessaire." },
-  { icon: SendHorizontal, title: "Envoyez vers l’add-on", text: "Les données validées sont transmises en un clic à l’add-on Chrome, prêtes pour SIV ou ANTS." },
+  { icon: Camera, title: "Prenez une photo", text: "Photographiez la carte grise et les pièces depuis votre téléphone." },
+  { icon: ScanLine, title: "Les données sont lues", text: "Certif Auto repère automatiquement les informations utiles." },
+  { icon: BadgeCheck, title: "Vérifiez", text: "Contrôlez les données avant de continuer." },
+  { icon: SendHorizontal, title: "Continuez sur l’ordinateur", text: "Retrouvez les données dans votre navigateur pour remplir SIV ou ANTS." },
 ];
 
 function LandingPage() {
@@ -109,7 +109,7 @@ function LandingPage() {
             <div className="eyebrow"><Sparkles /> L’assistant intelligent des professionnels de l’auto</div>
             <h1>Automatisez vos démarches <span>SIV &amp; ANTS</span>.</h1>
             <p>
-              Prenez les documents de votre client en photo. Certif Auto extrait les informations, contrôle le dossier et les envoie directement à votre add-on Chrome pour préparer vos démarches SIV et ANTS.
+              Prenez les documents en photo. Certif Auto lit les informations et les rend disponibles dans votre navigateur, prêtes pour SIV ou ANTS.
             </p>
             <div className="hero-actions">
               <a className="button" href="#contact">Commencer gratuitement <ArrowRight /></a>
@@ -120,7 +120,7 @@ function LandingPage() {
               <span><Check /> Installation rapide</span>
               <span><Check /> Données sécurisées</span>
             </div>
-            <div className="capture-note"><Smartphone /> Photo sur l’application <MoveRight /> données prêtes dans l’add-on</div>
+            <div className="capture-note"><Smartphone /> Une photo <MoveRight /> vos données dans le navigateur</div>
           </div>
 
           <div className="product-card" aria-label="Aperçu du logiciel">
@@ -178,7 +178,7 @@ function LandingPage() {
                         <BadgeCheck />
                       </label>
                     ))}
-                    <button className="product-button"><SendHorizontal /> Envoyer à l’add-on SIV</button>
+                    <button className="product-button"><SendHorizontal /> Continuer dans le navigateur</button>
                   </div>
                 </div>
               </div>
@@ -219,22 +219,22 @@ function LandingPage() {
       <section className="section capture-section" id="mobile-addon">
         <div className="container capture-layout">
           <div className="capture-copy">
-            <span className="section-kicker">DU TÉLÉPHONE À L’ADD-ON</span>
-            <h2>Prenez la photo. L’add-on reçoit les données.</h2>
+            <span className="section-kicker">DU TÉLÉPHONE AU NAVIGATEUR</span>
+            <h2>Une photo. Vos données sont prêtes sur l’ordinateur.</h2>
             <p>
-              Ouvrez Certif Auto sur votre téléphone et photographiez la carte grise ou les pièces du dossier. L’application lit les documents, vous laisse vérifier les informations, puis transmet les données validées directement à l’add-on Chrome ouvert sur votre poste.
+              Photographiez les documents. Vérifiez les informations. Retrouvez-les aussitôt dans votre navigateur pour continuer sur SIV ou ANTS.
             </p>
             <ul className="capture-benefits">
-              <li><Check /> Aucun fichier à vous envoyer manuellement entre le téléphone et l’ordinateur</li>
-              <li><Check /> Les champs détectés restent vérifiables avant chaque envoi</li>
-              <li><Check /> Les données arrivent structurées et prêtes à être utilisées sur SIV ou ANTS</li>
+              <li><Check /> Pas de ressaisie</li>
+              <li><Check /> Pas de transfert manuel</li>
+              <li><Check /> Vous vérifiez avant l’envoi</li>
             </ul>
             <div className="capture-flow-labels" aria-label="Parcours des données">
-              <span><Camera /> Photo</span><MoveRight /><span><ScanLine /> Extraction OCR</span><MoveRight /><span><PanelsTopLeft /> Add-on Chrome</span>
+              <span><Camera /> Photo</span><MoveRight /><span><ScanLine /> Lecture automatique</span><MoveRight /><span><PanelsTopLeft /> Navigateur web</span>
             </div>
           </div>
 
-          <div className="transfer-demo" aria-label="Illustration du transfert des données depuis le téléphone vers l’add-on Chrome">
+          <div className="transfer-demo" aria-label="Illustration du transfert des données depuis le téléphone vers le navigateur web">
             <div className="phone-mockup">
               <div className="phone-top"><i /> Certif Auto</div>
               <div className="phone-camera">
@@ -253,7 +253,7 @@ function LandingPage() {
 
             <div className="addon-mockup">
               <div className="addon-topbar">
-                <span><PanelsTopLeft /> Add-on Certif Auto</span>
+                <span><PanelsTopLeft /> Certif Auto · Navigateur</span>
                 <i>Connecté</i>
               </div>
               <div className="addon-content">
@@ -265,7 +265,7 @@ function LandingPage() {
                 ].map(([label, value]) => (
                   <div className="addon-field" key={label}><span>{label}</span><strong>{value}</strong><Check /></div>
                 ))}
-                <div className="addon-ready"><Zap /> Prêt pour la démarche SIV / ANTS</div>
+                <div className="addon-ready"><Zap /> Prêt pour SIV / ANTS</div>
               </div>
             </div>
           </div>
