@@ -73,7 +73,7 @@ function LandingPage() {
           </a>
           <nav className="desktop-nav" aria-label="Navigation principale">
             <a href="#fonctionnement">Fonctionnement</a>
-            <a href="#demarches">Démarches</a>
+            <a href="#demarches">Démarches SIV & ANTS</a>
             <a href="#avantages">Avantages</a>
             <a href="#securite">Sécurité</a>
           </nav>
@@ -88,7 +88,7 @@ function LandingPage() {
         {menuOpen && (
           <nav className="mobile-nav" aria-label="Navigation mobile">
             <a href="#fonctionnement" onClick={() => setMenuOpen(false)}>Fonctionnement</a>
-            <a href="#demarches" onClick={() => setMenuOpen(false)}>Démarches</a>
+            <a href="#demarches" onClick={() => setMenuOpen(false)}>Démarches SIV & ANTS</a>
             <a href="#avantages" onClick={() => setMenuOpen(false)}>Avantages</a>
             <a href="#securite" onClick={() => setMenuOpen(false)}>Sécurité</a>
             <a className="button" href="#contact" onClick={() => setMenuOpen(false)}>Demander une démo</a>
@@ -102,9 +102,9 @@ function LandingPage() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <div className="eyebrow"><Sparkles /> L’assistant intelligent des professionnels de l’auto</div>
-            <h1>Automatisez vos démarches <span>SIV</span>.</h1>
+            <h1>Automatisez vos démarches <span>SIV &amp; ANTS</span>.</h1>
             <p>
-              Déposez les documents de votre client. Certif Auto extrait les informations, contrôle le dossier et prépare la saisie pour vous.
+              Déposez les documents de votre client. Certif Auto extrait les informations, contrôle le dossier et prépare vos démarches SIV et ANTS pour vous.
             </p>
             <div className="hero-actions">
               <a className="button" href="#contact">Commencer gratuitement <ArrowRight /></a>
@@ -141,7 +141,15 @@ function LandingPage() {
                 </div>
                 <div className="workspace-grid">
                   <div className="upload-panel">
-                    <div className="upload-icon"><UploadCloud /></div>
+                    <div className="scan-preview" aria-label="Animation de lecture automatique d’une carte grise">
+                      <img src="/carte-grise-demo.svg" alt="Exemple fictif de carte grise en cours d’analyse" />
+                      <span className="scan-beam" />
+                      <span className="scan-corner scan-corner-tl" />
+                      <span className="scan-corner scan-corner-tr" />
+                      <span className="scan-corner scan-corner-bl" />
+                      <span className="scan-corner scan-corner-br" />
+                      <span className="scan-label"><ScanLine /> Lecture de la carte grise…</span>
+                    </div>
                     <strong>Documents importés</strong>
                     <p>L’analyse automatique est terminée.</p>
                     {["Carte grise", "Pièce d’identité", "Justificatif de domicile", "Certificat de cession"].map((label) => (
