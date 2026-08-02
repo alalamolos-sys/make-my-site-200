@@ -1,3 +1,0 @@
-export function renderErrorPage() {
-  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Une erreur est survenue</title><style>body{font-family:Inter,system-ui,sans-serif;background:#f8fafc;color:#0f172a;display:grid;place-items:center;min-height:100vh;margin:0}.box{max-width:520px;padding:32px;border:1px solid #e2e8f0;border-radius:20px;background:white;box-shadow:0 20px 50px rgba(15,23,42,.08)}h1{margin:0 0 12px}p{color:#64748b;line-height:1.6}</style></head><body><main class="box"><h1>Une erreur est survenue</h1><p>Rechargez la page. Si le problème persiste, contactez le support.</p></main></body></html>`;
-}
