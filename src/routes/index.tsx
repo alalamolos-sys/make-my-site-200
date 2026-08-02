@@ -3,6 +3,7 @@ import {
   ArrowRight,
   BadgeCheck,
   Building2,
+  Camera,
   Car,
   Check,
   ChevronRight,
@@ -15,11 +16,15 @@ import {
   KeyRound,
   LockKeyhole,
   Menu,
+  MonitorCheck,
+  MoveRight,
+  PanelsTopLeft,
   ScanLine,
   Search,
   ShieldCheck,
   Sparkles,
-  UploadCloud,
+  Smartphone,
+  SendHorizontal,
   UserRound,
   Wrench,
   X,
@@ -41,10 +46,10 @@ const procedures = [
 ];
 
 const steps = [
-  { icon: UploadCloud, title: "Déposez les documents", text: "Ajoutez les pièces du client en PDF, photo ou scan." },
-  { icon: ScanLine, title: "L’IA analyse", text: "Les informations utiles sont reconnues et structurées." },
-  { icon: BadgeCheck, title: "Vérifiez le dossier", text: "Les incohérences et pièces manquantes sont signalées." },
-  { icon: Zap, title: "Finalisez plus vite", text: "Les champs sont prêts à être reportés dans votre démarche SIV." },
+  { icon: Camera, title: "Prenez les pièces en photo", text: "Depuis Certif Auto sur votre téléphone, photographiez la carte grise et les documents du dossier." },
+  { icon: ScanLine, title: "L’IA extrait les données", text: "L’OCR reconnaît automatiquement les informations utiles et les organise champ par champ." },
+  { icon: BadgeCheck, title: "Vérifiez en quelques secondes", text: "Contrôlez les données détectées et corrigez-les uniquement si nécessaire." },
+  { icon: SendHorizontal, title: "Envoyez vers l’add-on", text: "Les données validées sont transmises en un clic à l’add-on Chrome, prêtes pour SIV ou ANTS." },
 ];
 
 function LandingPage() {
@@ -104,7 +109,7 @@ function LandingPage() {
             <div className="eyebrow"><Sparkles /> L’assistant intelligent des professionnels de l’auto</div>
             <h1>Automatisez vos démarches <span>SIV &amp; ANTS</span>.</h1>
             <p>
-              Déposez les documents de votre client. Certif Auto extrait les informations, contrôle le dossier et prépare vos démarches SIV et ANTS pour vous.
+              Prenez les documents de votre client en photo. Certif Auto extrait les informations, contrôle le dossier et les envoie directement à votre add-on Chrome pour préparer vos démarches SIV et ANTS.
             </p>
             <div className="hero-actions">
               <a className="button" href="#contact">Commencer gratuitement <ArrowRight /></a>
@@ -115,6 +120,7 @@ function LandingPage() {
               <span><Check /> Installation rapide</span>
               <span><Check /> Données sécurisées</span>
             </div>
+            <div className="capture-note"><Smartphone /> Photo sur l’application <MoveRight /> données prêtes dans l’add-on</div>
           </div>
 
           <div className="product-card" aria-label="Aperçu du logiciel">
@@ -172,7 +178,7 @@ function LandingPage() {
                         <BadgeCheck />
                       </label>
                     ))}
-                    <button className="product-button"><Zap /> Préparer la saisie SIV</button>
+                    <button className="product-button"><SendHorizontal /> Envoyer à l’add-on SIV</button>
                   </div>
                 </div>
               </div>
@@ -206,6 +212,62 @@ function LandingPage() {
                 <p>{step.text}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section capture-section" id="mobile-addon">
+        <div className="container capture-layout">
+          <div className="capture-copy">
+            <span className="section-kicker">DU TÉLÉPHONE À L’ADD-ON</span>
+            <h2>Prenez la photo. L’add-on reçoit les données.</h2>
+            <p>
+              Ouvrez Certif Auto sur votre téléphone et photographiez la carte grise ou les pièces du dossier. L’application lit les documents, vous laisse vérifier les informations, puis transmet les données validées directement à l’add-on Chrome ouvert sur votre poste.
+            </p>
+            <ul className="capture-benefits">
+              <li><Check /> Aucun fichier à vous envoyer manuellement entre le téléphone et l’ordinateur</li>
+              <li><Check /> Les champs détectés restent vérifiables avant chaque envoi</li>
+              <li><Check /> Les données arrivent structurées et prêtes à être utilisées sur SIV ou ANTS</li>
+            </ul>
+            <div className="capture-flow-labels" aria-label="Parcours des données">
+              <span><Camera /> Photo</span><MoveRight /><span><ScanLine /> Extraction OCR</span><MoveRight /><span><PanelsTopLeft /> Add-on Chrome</span>
+            </div>
+          </div>
+
+          <div className="transfer-demo" aria-label="Illustration du transfert des données depuis le téléphone vers l’add-on Chrome">
+            <div className="phone-mockup">
+              <div className="phone-top"><i /> Certif Auto</div>
+              <div className="phone-camera">
+                <img src="/carte-grise-demo.svg" alt="Carte grise fictive photographiée dans l’application Certif Auto" />
+                <span className="focus-corner focus-tl" /><span className="focus-corner focus-tr" />
+                <span className="focus-corner focus-bl" /><span className="focus-corner focus-br" />
+                <span className="photo-status"><BadgeCheck /> Photo nette</span>
+              </div>
+              <div className="phone-action"><Camera /><span>Document capturé</span></div>
+            </div>
+
+            <div className="transfer-bridge" aria-hidden="true">
+              <span className="transfer-pulse"><SendHorizontal /></span>
+              <small>Données envoyées</small>
+            </div>
+
+            <div className="addon-mockup">
+              <div className="addon-topbar">
+                <span><PanelsTopLeft /> Add-on Certif Auto</span>
+                <i>Connecté</i>
+              </div>
+              <div className="addon-content">
+                <div className="addon-success"><MonitorCheck /><span><strong>Données reçues</strong><small>depuis l’application</small></span></div>
+                {[
+                  ["Immatriculation", "AB-123-CD"],
+                  ["Titulaire", "Sophie Martin"],
+                  ["VIN", "VF1RFB00X12345678"],
+                ].map(([label, value]) => (
+                  <div className="addon-field" key={label}><span>{label}</span><strong>{value}</strong><Check /></div>
+                ))}
+                <div className="addon-ready"><Zap /> Prêt pour la démarche SIV / ANTS</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
